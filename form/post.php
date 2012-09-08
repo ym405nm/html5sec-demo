@@ -44,6 +44,9 @@
             <ul class="nav">
               <li><a href="/">Home</a></li>
               <li class="active"><a href="/form">Form</a></li>
+              <li><a href="/ajax">Ajax</a></li>
+              <li><a href="/iframe">Iframe</a></li>
+              <li><a href="/filter">Filter</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

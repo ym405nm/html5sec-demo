@@ -1,8 +1,16 @@
-<!DOCTYPE html>
+<?php 
+if(strcmp($_POST['filter'],'1')==0){
+	header('X-XSS-Protection: 1');
+}else if(strcmp($_POST['filter'],'2')==0){
+	header('X-XSS-Protection: 1; mode=block');
+}else{
+	
+}
+?><!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <title>FORM | HTML5SEC Demo</title>
+    <title>Filter | HTML5SEC Demo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -42,11 +50,11 @@
           <a class="brand" href="/">HTML5SEC Demo</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li><a href="/xss">XSS</a></li>
-              <li class="active"><a href="/form">Form</a></li>
+              <li><a href="/form">XSS</a></li>
+              <li><a href="/form">Form</a></li>
               <li><a href="/ajax">Ajax</a></li>
               <li><a href="/iframe">Iframe</a></li>
-              <li><a href="/filter">Filter</a></li>
+              <li class="active"><a href="/filter">Filter</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -55,48 +63,25 @@
 
     <div class="container">
 
-	<h1>Form</h1>
-
-	<form class="form-horizontal" action="post.php" method="post">
-	    <fieldset>
-	    <legend>Legend text</legend>
-	    
-	    <div class="control-group">
-	    	<label class="control-label" for="name">Name</label>
-	    	<div class="controls">
-	    	    <input type="text" class="input-xlarge" id="name" name="name" value="Matthew Henry Murton" required>
-	    	</div>
-	    </div>
-
-	    <div class="control-group">
-	    	<label class="control-label" for="email">Email</label>
-	    	<div class="controls">
-	    	    <input type="email" class="input-xlarge" id="email" name="email" value="Murton@tigers.html5" required>
-	    	</div>
-	    </div>
-
-	    <div class="control-group">
-	    	<label class="control-label" for="url">URL</label>
-	    	<div class="controls">
-	    	    <input type="url" class="input-xlarge" id="url" name="url" value="http://tigers.html5/murton" required>
-	    	</div>
-	    </div>
-
-	    <div class="control-group">
-		<label class="control-label" for="comment">Comment</label>
-		<div class="controls">
-		    <textarea class="input-xlarge" id="comment" rows="3" name="comment" required>Matthew Henry Murton</textarea>
-		</div>
-	    </div>
-
-	    <div class="form-actions">
-            	<input type="submit" class="btn btn-primary" value="Submit">
-            	<input type="button" class="btn" value="Cancel" onclick="javascript:history.back();">
-            </div>
-
-	    </fieldset>
+	<h1>おみくじゲーム</h1>
+	
+	<form method="post" action="">
+	<select name="filter">
+		<option value="0">none</option>
+		<option value="1">X-XSS-Protection: 1</option>
+		<option value="2">X-XSS-Protection: 1; mode=block</option>
+	</select>
+	<input type="text" name="name" value="">
+	<input class="btn btn-primary" type="submit" value="submit">
 	</form>
-
+	
+	<?php 
+		if(!empty($_POST['name'])){
+			echo "<hr>";	
+			printf("<h2>%s</h2>",$_POST['name']);
+		}
+	?>
+	
     </div> <!-- /container -->
 
     <!-- Le javascript

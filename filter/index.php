@@ -3,8 +3,8 @@ if(strcmp($_POST['filter'],'1')==0){
 	header('X-XSS-Protection: 1');
 }else if(strcmp($_POST['filter'],'2')==0){
 	header('X-XSS-Protection: 1; mode=block');
-}else{
-	
+}else if(strcmp($_POST['filter'],'3')==0){
+	header('X-XSS-Protection: 0');
 }
 ?><!DOCTYPE html>
 <html>
@@ -63,22 +63,23 @@ if(strcmp($_POST['filter'],'1')==0){
 
     <div class="container">
 
-	<h1>おみくじゲーム</h1>
+	<h1>XSS FILTER TEST</h1>
 	
 	<form method="post" action="">
 	<select name="filter">
 		<option value="0">none</option>
 		<option value="1">X-XSS-Protection: 1</option>
 		<option value="2">X-XSS-Protection: 1; mode=block</option>
+		<option value="3">X-XSS-Protection: 0</option>
 	</select>
-	<input type="text" name="name" value="">
+	<input type="text" name="name" value="<script>alert(1)</script>">
 	<input class="btn btn-primary" type="submit" value="submit">
 	</form>
 	
 	<?php 
 		if(!empty($_POST['name'])){
 			echo "<hr>";	
-			printf("<h2>%s</h2>",$_POST['name']);
+			printf("<p>%s</p>",$_POST['name']);
 		}
 	?>
 	
